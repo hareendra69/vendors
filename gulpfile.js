@@ -57,7 +57,7 @@ names.forEach(function(name) {
             });
             gulp.src('**/docs/**/*.md')
                 .pipe(markdown())
-                .pipe(gulp.dest('./docs-html'))
+                .pipe(gulp.dest('markup'))
                 .pipe(notify('markdown ==>> '+name));
         });
     }); 
