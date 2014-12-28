@@ -4,12 +4,16 @@
   "description": "",
   "main": "gulpfile.js",
   "dependencies": {
+    "express-livereload": "0.0.24",
     "gulp": "^3.8.10",
     "gulp-markdown": "^1.0.0",
     "gulp-notify": "^2.1.0",
     "shelljs": "^0.3.0"
   },
-  "devDependencies": {},
+  "devDependencies": {
+    "gulp-html2jade": "^1.1.0",
+    "gulp-rename": "^1.2.0"
+  },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },

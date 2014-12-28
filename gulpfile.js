@@ -3,13 +3,15 @@ var fs = require('fs');
 var gulp = require('gulp');
 var shell = require('shelljs');
 var notify = require('gulp-notify');
+var rename = require('gulp-rename');
 var markdown = require('gulp-markdown');
+var html2jade = require('gulp-html2jade');
 
 var repos = {
     'd3': 'https://github.com/mbostock/d3.git',
     'gulp': 'https://github.com/gulpjs/gulp.git',
     'ionic': 'https://github.com/driftyco/ionic.git',
-    'myapp': 'http://github.com/alex-katebi/myapp.git',
+    //'myapp': 'http://github.com/alex-katebi/myapp.git',
     'bootstrap': 'https://github.com/twbs/bootstrap.git',
     'shelljs': 'https://github.com/arturadib/shelljs.git',
     'angular': 'https://github.com/angular/angular.js.git',
@@ -52,14 +54,16 @@ names.forEach(function(name) {
                     console.log('bower install ==>>', dir);
                 });
             });
-            gulp.src('*.md')
+            gulp.src('**/**/**/*.md')
                 .pipe(markdown())
-                .pipe(gulp.dest('*.html'))
+                .pipe(rename({extname: '.html'}))
+                .pipe(gulp.dest('html'))
                 .pipe(notify('*.md to html ==>> '+name));
-            gulp.src('**/docs/**/*.md', {base:'docs'})
-                .pipe(markdown())
-                .pipe(gulp.dest('docs-html'))
-                .pipe(notify('docs to html ==>> '+name));
+            
+            gulp.src('./**/**/*.html')
+                .pipe(html2jade({bodyless:1}))
+                .pipe(gulp.dest('.'))
+                .pipe(notify('html to jade ==>> '+name));
         });
     }); 
 });
